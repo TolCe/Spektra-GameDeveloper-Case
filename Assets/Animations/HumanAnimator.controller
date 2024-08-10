@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1102 &-6664820469848626991
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -20,8 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: a08766a63648f894c960e5fa13c1dc30,
-    type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: a08766a63648f894c960e5fa13c1dc30, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -29,7 +28,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &-4478648871500784477
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -48,8 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: ce51c8eedea9c724096dc40f81f8362b,
-    type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: ce51c8eedea9c724096dc40f81f8362b, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -104,7 +102,7 @@ AnimatorStateTransition:
   m_CanTransitionToSelf: 1
 --- !u!1102 &-309273905670968798
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,7 +169,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
 --- !u!1107 &6950611496010621308
 AnimatorStateMachine:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -206,26 +204,15 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 29d5803d6fdb8e4489ff1f88bbb0c345,
-      type: 3}
-    m_Threshold: 0
+    m_Motion: {fileID: -203655887218126122, guid: ae58801144621ac44b717c11f6066ae5, type: 3}
+    m_Threshold: 0.125
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: ae58801144621ac44b717c11f6066ae5,
-      type: 3}
-    m_Threshold: 0.09375
-    m_Position: {x: 0, y: 2}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Blend
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: fb828811bbe15d84293e5296e147d3a4,
-      type: 3}
+    m_Motion: {fileID: -203655887218126122, guid: 09ffd647bbfaf2946a54c58f3d7dfb20, type: 3}
     m_Threshold: 0.1875
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -233,26 +220,32 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 09ffd647bbfaf2946a54c58f3d7dfb20,
-      type: 3}
-    m_Threshold: 0.28125
-    m_Position: {x: 0, y: -2}
+    m_Motion: {fileID: -203655887218126122, guid: 53582a56a700c0149a73877d530c2e4b, type: 3}
+    m_Threshold: 0.25
+    m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
-    m_DirectBlendParameter: Blend
+    m_DirectBlendParameter: Horizontal
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 53582a56a700c0149a73877d530c2e4b,
-      type: 3}
+    m_Motion: {fileID: -203655887218126122, guid: 30d71b46e1322614b8394377e13317a9, type: 3}
+    m_Threshold: 0.3125
+    m_Position: {x: -1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Horizontal
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 6bd31e6326ec638418f17c86858d0e3a, type: 3}
     m_Threshold: 0.375
-    m_Position: {x: 0, y: 0}
+    m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Horizontal
     m_Mirror: 0
   m_BlendParameter: Horizontal
   m_BlendParameterY: Vertical
-  m_MinThreshold: 0
+  m_MinThreshold: 0.125
   m_MaxThreshold: 0.375
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0

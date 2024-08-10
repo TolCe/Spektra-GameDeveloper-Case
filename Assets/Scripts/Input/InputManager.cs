@@ -4,9 +4,6 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] private InputDataSO _inputData;
 
-    [SerializeField] private PlayerMovementController _playerMovementController;
-    [SerializeField] private PlayerShootController _playerShootController;
-
     private void FixedUpdate()
     {
         if (Input.GetKey(_inputData.ForwardKey))

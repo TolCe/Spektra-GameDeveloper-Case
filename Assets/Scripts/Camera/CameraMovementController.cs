@@ -10,6 +10,11 @@ public class CameraMovementController : MonoBehaviour, IMovable
 
     private void Start()
     {
+        SetOffset();
+    }
+
+    private void SetOffset()
+    {
         _offset = transform.position - _playerMovementController.transform.position;
     }
 

@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
 
     public void SetPosition(Vector3 position)
     {
-        MovementController.MoveTransform.position = position;
+        _movementController.MoveTransform.position = position;
     }
 
     public void GetHit(WeaponProperties weaponProperties)
