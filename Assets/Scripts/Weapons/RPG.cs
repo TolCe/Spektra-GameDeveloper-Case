@@ -3,14 +3,8 @@ public class RPG : Weapon, IWeapon
     public void Shoot()
     {
         Projectile projectile = CreateBullet();
-        WeaponProperties weaponProperties = new WeaponProperties()
-        {
-            Damage = WeaponData.Damage,
-            Range = WeaponData.Range,
-            Speed = WeaponData.Speed,
-        };
         projectile.SetTransform(transform.position, transform.eulerAngles);
-        projectile.Initialize(weaponProperties);
+        projectile.Initialize(SetWeaponProperties());
     }
 
     public Projectile CreateBullet()

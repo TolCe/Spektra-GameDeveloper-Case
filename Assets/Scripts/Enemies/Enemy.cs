@@ -1,9 +1,19 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IAlive
+public class Enemy : Character
 {
-    public void ModifyHealth(int modifyAmount)
+    public void Initialize(Vector3 position)
     {
-        throw new System.NotImplementedException();
+        Initialize();
+
+        MovementController.MoveTransform.position = position;
+        gameObject.SetActive(true);
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        CharacterManager.Instance.OnEnemyDeath(this);
     }
 }

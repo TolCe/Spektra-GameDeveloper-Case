@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ProjectilesData_Rocket
   m_EditorClassIdentifier: 
   Type: 1
-  Prefab: {fileID: 6259929512672029970, guid: 0e6845e58681d0a4eaa57f862de1a0d3, type: 3}
+  Prefab: {fileID: 7397245893681193165, guid: 0e6845e58681d0a4eaa57f862de1a0d3, type: 3}

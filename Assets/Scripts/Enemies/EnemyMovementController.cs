@@ -1,46 +1,86 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyMovementController : MovementController, IMovable, IRotatable
+public class EnemyMovementController : MovementController, IRotatable
 {
     private Vector3 _targetPos;
 
-    private void Start()
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private FieldOfView _fov;
+
+    public float range;
+    private Vector3 _destination;
+    private bool _hasDestination;
+
+    private void Awake()
     {
-        GetRandomPosition();
-        StartCoroutine(MoveRoutine());
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        _navMeshAgent.speed = MovementData.Speed;
     }
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, _targetPos) < 0.2f)
+        if (_fov.VisibleTargets.Count > 0)
         {
-            GetRandomPosition();
+            LookAt(_fov.VisibleTargets[0].GetPosition());
+            FollowTarget();
+        }
+        else
+        {
+            LookAt(_navMeshAgent.destination);
+
+            if (!_hasDestination)
+            {
+                GoRandomPosition();
+            }
+            else
+            {
+                if (Vector3.Distance(MoveTransform.position, _destination) < 2)
+                {
+                    _hasDestination = false;
+                }
+            }
         }
     }
 
-    private void GetRandomPosition()
+    public override void Stop()
     {
-        _targetPos = new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f));
+        base.Stop();
+
+        _navMeshAgent.isStopped = true;
     }
 
-    private IEnumerator MoveRoutine()
+    private void GoRandomPosition()
     {
-        Vector3 direction = Vector3.zero;
-        while (gameObject.activeInHierarchy)
+        _hasDestination = true;
+        _navMeshAgent.SetDestination(GetRandomPoint(Vector3.zero, range));
+        _navMeshAgent.stoppingDistance = 0;
+    }
+
+    private void FollowTarget()
+    {
+        _hasDestination = false;
+        _navMeshAgent.SetDestination(_fov.VisibleTargets[0].GetPosition());
+        _navMeshAgent.stoppingDistance = 6;
+    }
+
+    private Vector3 GetRandomPoint(Vector3 center, float maxDistance)
+    {
+        Vector3 _randomPos = Random.insideUnitSphere * maxDistance + center;
+        _randomPos.y = MoveTransform.position.y;
+        NavMeshHit _hit;
+
+        if (NavMesh.SamplePosition(_randomPos, out _hit, maxDistance, NavMesh.AllAreas))
         {
-            direction = _targetPos - transform.position;
-
-            MoveInDirection(direction.normalized);
-
-            yield return new WaitForFixedUpdate();
+            _destination = _hit.position;
         }
-    }
 
-    public void MoveInDirection(Vector3 direction)
-    {
-        MoveTransform.Translate(MovementData.Speed * direction * Time.fixedDeltaTime);
-        LookAt(MoveTransform.position + direction);
+        return _destination;
     }
 
     public void LookAt(Vector3 position)

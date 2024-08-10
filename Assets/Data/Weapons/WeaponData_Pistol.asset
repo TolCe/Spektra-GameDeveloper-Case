@@ -16,6 +16,7 @@ MonoBehaviour:
   _cooldown: 1
   _bulletsToCooldown: 1
   _bulletInterval: 0
+  _armourPenetrationRatio: 0.2
   _damage: 10
   _range: 10
   _speed: 20

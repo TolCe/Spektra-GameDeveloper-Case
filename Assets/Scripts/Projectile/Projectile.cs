@@ -6,11 +6,11 @@ public class Projectile : MonoBehaviour
     [SerializeField] private ProjectileDataSO _projectileData;
     public ProjectileDataSO ProjectileData { get { return _projectileData; } }
 
-    private WeaponProperties _weaponProperties;
+    public WeaponProperties WeaponProperties { get; private set; }
 
     public void Initialize(WeaponProperties weaponProperties)
     {
-        _weaponProperties = weaponProperties;
+        WeaponProperties = weaponProperties;
 
         gameObject.SetActive(true);
 
@@ -21,11 +21,6 @@ public class Projectile : MonoBehaviour
     {
         transform.position = pos;
         transform.eulerAngles = rot;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Hit(other.GetComponent<IAlive>());
     }
 
     public virtual void Move()
@@ -39,22 +34,15 @@ public class Projectile : MonoBehaviour
 
         while (gameObject.activeInHierarchy)
         {
-            transform.Translate(_weaponProperties.Speed * transform.forward * Time.fixedDeltaTime, Space.World);
+            transform.Translate(WeaponProperties.Speed * transform.forward * Time.fixedDeltaTime, Space.World);
 
-            if (Vector3.Distance(initPos, transform.position) > _weaponProperties.Range)
+            if (Vector3.Distance(initPos, transform.position) > WeaponProperties.Range)
             {
                 Despawn();
             }
 
             yield return new WaitForFixedUpdate();
         }
-    }
-
-    public virtual void Hit(IAlive alive)
-    {
-        alive?.ModifyHealth(-_weaponProperties.Damage);
-
-        Despawn();
     }
 
     public void Despawn()
@@ -65,7 +53,8 @@ public class Projectile : MonoBehaviour
 
 public struct WeaponProperties
 {
-    public int Damage;
+    public float Damage;
     public float Range;
     public float Speed;
+    public float ArmourPenetrationRatio;
 }

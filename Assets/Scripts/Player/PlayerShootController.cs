@@ -29,7 +29,7 @@ public class PlayerShootController : MonoBehaviour
             return;
         }
 
-       (_currentWeapon as IWeapon).Shoot();
+        (_currentWeapon as IWeapon).Shoot();
         _cooldown = _currentWeapon.WeaponData.Cooldown;
     }
 

@@ -1,16 +1,23 @@
+using System.Collections;
+using UnityEngine;
+
 public class Rifle : Weapon, IWeapon
 {
     public void Shoot()
     {
-        Projectile projectile = CreateBullet();
-        WeaponProperties weaponProperties = new WeaponProperties()
+        StartCoroutine(BurstShot());
+    }
+
+    private IEnumerator BurstShot()
+    {
+        for (int i = 0; i < 3; i++)
         {
-            Damage = WeaponData.Damage,
-            Range = WeaponData.Range,
-            Speed = WeaponData.Speed,
-        };
-        projectile.SetTransform(transform.position, transform.eulerAngles);
-        projectile.Initialize(weaponProperties);
+            Projectile projectile = CreateBullet();
+            projectile.SetTransform(transform.position, transform.eulerAngles);
+            projectile.Initialize(SetWeaponProperties());
+
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     public Projectile CreateBullet()

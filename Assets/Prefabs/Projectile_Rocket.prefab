@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6285088471575533652}
-  - component: {fileID: 6259929512672029970}
+  - component: {fileID: 7397245893681193165}
   m_Layer: 0
   m_Name: Projectile_Rocket
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1399465765115084208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6259929512672029970
+--- !u!114 &7397245893681193165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1950619829473021895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca03265983d63f448a9749698f1cf0ce, type: 3}
+  m_Script: {fileID: 11500000, guid: c7a7887da6ad35e40b5082520963f19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileData: {fileID: 11400000, guid: f9cebdd8349a943478032449d4a059b4, type: 2}
@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 1190619214212841746}
   - component: {fileID: 3601602530653712729}
   - component: {fileID: 6527918428504848552}
+  - component: {fileID: 2891652590410941436}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -145,7 +146,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -153,3 +154,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2891652590410941436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3899970834906398560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a57c52a02820ab4e895ae28be2f53e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

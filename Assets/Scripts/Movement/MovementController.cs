@@ -11,4 +11,9 @@ public class MovementController : MonoBehaviour
     public Transform MoveTransform { get { return _moveTransform; } }
     [SerializeField] private Transform _rotateTransform;
     public Transform RotateTransform { get { return _rotateTransform; } }
+
+    public virtual void Stop()
+    {
+
+    }
 }
