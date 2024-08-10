@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -7,19 +8,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private Transform _barrelPointTransform;
     public Transform BarrelPointTransform { get { return _barrelPointTransform; } }
-
-    public WeaponProperties SetWeaponProperties()
-    {
-        WeaponProperties weaponProperties = new WeaponProperties()
-        {
-            Damage = WeaponData.Damage,
-            Range = WeaponData.Range,
-            Speed = WeaponData.Speed,
-            ArmourPenetrationRatio = WeaponData.ArmourPenetrationRatio,
-        };
-
-        return weaponProperties;
-    }
 
     public void Show()
     {

@@ -38,20 +38,30 @@ public class Projectile : MonoBehaviour
 
             if (Vector3.Distance(initPos, transform.position) > WeaponProperties.Range)
             {
-                Despawn();
+                OnRangeReached();
             }
 
             yield return new WaitForFixedUpdate();
         }
     }
 
-    public void Despawn()
+    public virtual void OnHit(Character character)
+    {
+
+    }
+
+    public virtual void OnRangeReached()
+    {
+        Despawn();
+    }
+
+    private void Despawn()
     {
         ProjectileManager.Instance.HideItem(this);
     }
 }
 
-public struct WeaponProperties
+public class WeaponProperties
 {
     public float Damage;
     public float Range;

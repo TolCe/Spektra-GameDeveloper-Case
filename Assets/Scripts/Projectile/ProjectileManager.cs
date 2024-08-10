@@ -25,7 +25,7 @@ public class ProjectileManager : Singleton<ProjectileManager>
         for (int i = 0; i < Enum.GetNames(typeof(Enums.ProjectileTypes)).Length; i++)
         {
             Enums.ProjectileTypes type = (Enums.ProjectileTypes)i;
-            ObjectPool<Projectile> projectilePool = new ObjectPool<Projectile>(_projectileDataContainer.GetProjectileDataByType(type).Prefab, 20, _projectileContainer);
+            ObjectPool<Projectile> projectilePool = new ObjectPool<Projectile>(_projectileDataContainer.GetDataByType(type).Prefab, 20, _projectileContainer);
             _projectilePoolDictionary.Add(type, projectilePool);
         }
     }

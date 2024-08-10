@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f972af34f941c4097fa7ac8aff5bf8, type: 3}
   m_Name: ProjectilesData_Bullet
   m_EditorClassIdentifier: 
-  Type: 0
-  Prefab: {fileID: 4745564993358461473, guid: ed9e41829cf9db249b01eb092fcb2fc3, type: 3}
+  _type: 0
+  _prefab: {fileID: 4745564993358461473, guid: ed9e41829cf9db249b01eb092fcb2fc3, type: 3}
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 64

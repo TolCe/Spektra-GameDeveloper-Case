@@ -1,46 +1,25 @@
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class PlayerShootController : MonoBehaviour
+public class PlayerShootController : ShootController
 {
-    private float _cooldown;
-
-    private Weapon _currentWeapon;
-
-    [SerializeField] private List<Weapon> _weaponList;
-
-    private void Start()
+    private void OnEnable()
     {
-        EquipWeapon(Enums.WeaponTypes.Pistol);
+        InputEvents.OnShoot += OnShoot;
+        InputEvents.OnWeaponChange += OnWeaponChange;
+    }
+    private void OnDisable()
+    {
+        InputEvents.OnShoot -= OnShoot;
+        InputEvents.OnWeaponChange -= OnWeaponChange;
     }
 
-    private void Update()
+    private void OnShoot()
     {
-        if (_cooldown > 0)
-        {
-            _cooldown -= Time.deltaTime;
-        }
+        Shoot();
     }
 
-    public void Shoot()
+    private void OnWeaponChange(Enums.WeaponTypes weaponType)
     {
-        if (_cooldown > 0)
-        {
-            return;
-        }
-
-        (_currentWeapon as IWeapon).Shoot();
-        _cooldown = _currentWeapon.WeaponData.Cooldown;
-    }
-
-    public void EquipWeapon(Enums.WeaponTypes weaponType)
-    {
-        foreach (Weapon weapon in _weaponList)
-        {
-            weapon.Hide();
-        }
-
-        _currentWeapon = _weaponList.Find(x => x.WeaponData.Type == weaponType);
-        _currentWeapon.Show();
+        EquipWeapon(weaponType);
     }
 }

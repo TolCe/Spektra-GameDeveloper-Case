@@ -9,6 +9,8 @@ public class HealthController : MonoBehaviour
 
     private Character _attachedCharacter;
 
+    public bool IsAlive { get { return _healthProperty.Health > 0; } }
+
     private void Awake()
     {
         _healthProperty = new HealthProperties();
@@ -27,12 +29,12 @@ public class HealthController : MonoBehaviour
         return transform.position;
     }
 
-    public void Die()
+    public virtual void Die()
     {
         _attachedCharacter.Die();
     }
 
-    public void GetShot(WeaponProperties weaponProperties)
+    public void GetHit(WeaponProperties weaponProperties)
     {
         float armourDamage = weaponProperties.Damage * (1 - weaponProperties.ArmourPenetrationRatio);
         float healthDamage = (weaponProperties.Damage - armourDamage) + Mathf.Clamp(armourDamage - _healthProperty.Armour, 0, Mathf.Infinity);

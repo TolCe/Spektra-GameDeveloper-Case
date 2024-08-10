@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: WeaponData_Rifle
   m_EditorClassIdentifier: 
   _type: 1
-  _cooldown: 1
-  _bulletsToCooldown: 3
-  _bulletInterval: 0.2
+  _cooldown: 0.6
   _armourPenetrationRatio: 0.5
   _damage: 30
   _range: 20

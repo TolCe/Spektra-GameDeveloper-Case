@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 2
   _cooldown: 2
-  _bulletsToCooldown: 1
-  _bulletInterval: 0
   _armourPenetrationRatio: 0.8
   _damage: 50
   _range: 40

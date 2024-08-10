@@ -46,7 +46,7 @@ public class FieldOfView : MonoBehaviour
         for (int i = 0; i < collidersInRange.Length; i++)
         {
             Character character = collidersInRange[i].GetComponentInParent<Character>();
-            if (character != null && character != _attachedCharacter)
+            if (character != null && character.HealthController.IsAlive && character != _attachedCharacter)
             {
                 Vector3 targetPosition = character.GetPosition();
                 Vector3 directionToTarget = (targetPosition - transform.position).normalized;

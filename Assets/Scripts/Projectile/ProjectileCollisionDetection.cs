@@ -1,16 +1,15 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ProjectileCollisionDetection : MonoBehaviour
 {
-    private IProjectile _projectile;
-
-    private void Awake()
-    {
-        _projectile = GetComponentInParent<IProjectile>();
-    }
+    [SerializeField] private Projectile _projectile;
 
     private void OnTriggerEnter(Collider other)
     {
-        _projectile.Hit(other.GetComponentInParent<HealthController>());
+        if (_projectile.ProjectileData.TargetLayers == (_projectile.ProjectileData.TargetLayers | (1 << other.gameObject.layer)))
+        {
+            _projectile.OnHit(other.GetComponentInParent<Character>());
+        }
     }
 }

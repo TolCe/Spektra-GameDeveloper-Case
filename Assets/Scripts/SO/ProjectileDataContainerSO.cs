@@ -7,7 +7,7 @@ public class ProjectileDataContainerSO : ScriptableObject
 {
     [SerializeField] private List<ProjectileDataSO> _projectileDataList;
 
-    public ProjectileDataSO GetProjectileDataByType(Enums.ProjectileTypes type)
+    public ProjectileDataSO GetDataByType(Enums.ProjectileTypes type)
     {
         return _projectileDataList.Find(x => x.Type == type);
     }

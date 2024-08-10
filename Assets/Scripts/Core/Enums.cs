@@ -21,4 +21,11 @@ public class Enums
         Bullet,
         Rocket,
     }
+
+    public enum CollectableTypes
+    {
+        Scope,
+        ArmorPiercing,
+        Barrel,
+    }
 }

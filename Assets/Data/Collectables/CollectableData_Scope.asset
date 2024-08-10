@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9de734a8c9b5b46a19191a063c2a7e, type: 3}
+  m_Name: CollectableData_Scope
+  m_EditorClassIdentifier: 
+  _type: 0
+  _bonusMultiplier: 1.5
+  _prefab: {fileID: -4570299383277519362, guid: d99bd74720d4cc644bab7d42456a9b2f, type: 3}
+  _amountOnScene: 5
+  _poolSize: 5

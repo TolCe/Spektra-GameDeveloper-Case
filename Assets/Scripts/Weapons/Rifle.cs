@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class Rifle : Weapon, IWeapon
 {
-    public void Shoot()
+    public void Shoot(WeaponProperties weaponProperties)
     {
-        StartCoroutine(BurstShot());
+        StartCoroutine(BurstShot(weaponProperties));
     }
 
-    private IEnumerator BurstShot()
+    private IEnumerator BurstShot(WeaponProperties weaponProperties)
     {
         for (int i = 0; i < 3; i++)
         {
             Projectile projectile = CreateBullet();
             projectile.SetTransform(transform.position, transform.eulerAngles);
-            projectile.Initialize(SetWeaponProperties());
+            projectile.Initialize(weaponProperties);
 
             yield return new WaitForFixedUpdate();
         }

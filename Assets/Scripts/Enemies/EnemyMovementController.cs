@@ -4,47 +4,62 @@ using UnityEngine.AI;
 
 public class EnemyMovementController : MovementController, IRotatable
 {
-    private Vector3 _targetPos;
+    private Enemy _enemy;
 
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private FieldOfView _fov;
 
-    public float range;
+    [SerializeField] private float _range;
     private Vector3 _destination;
     private bool _hasDestination;
 
-    private void Awake()
+    public override void Initialize(Character enemy)
     {
-        Initialize();
-    }
+        base.Initialize(enemy);
 
-    private void Initialize()
-    {
+        _enemy = enemy as Enemy;
+
         _navMeshAgent.speed = MovementData.Speed;
     }
 
     private void Update()
     {
-        if (_fov.VisibleTargets.Count > 0)
+        if (CanMove)
         {
-            LookAt(_fov.VisibleTargets[0].GetPosition());
-            FollowTarget();
-        }
-        else
-        {
-            LookAt(_navMeshAgent.destination);
-
-            if (!_hasDestination)
+            if (_fov.VisibleTargets.Count > 0)
             {
-                GoRandomPosition();
+                LookAt(_fov.VisibleTargets[0].GetPosition());
+                FollowTarget();
+
+                _enemy.ShootController.Shoot();
             }
             else
             {
-                if (Vector3.Distance(MoveTransform.position, _destination) < 2)
+                LookAt(_navMeshAgent.destination);
+
+                if (!_hasDestination)
                 {
-                    _hasDestination = false;
+                    GoRandomPosition();
+                }
+                else
+                {
+                    if (Vector3.Distance(MoveTransform.position, _destination) < 2)
+                    {
+                        _hasDestination = false;
+                    }
                 }
             }
+        }
+
+
+        if (_navMeshAgent.speed == 0)
+        {
+            AnimationController.ChangeFloat("Vertical", 0);
+            AnimationController.ChangeFloat("Horizontal", 0);
+        }
+        else
+        {
+            AnimationController.ChangeFloat("Vertical", 2);
         }
     }
 
@@ -58,7 +73,7 @@ public class EnemyMovementController : MovementController, IRotatable
     private void GoRandomPosition()
     {
         _hasDestination = true;
-        _navMeshAgent.SetDestination(GetRandomPoint(Vector3.zero, range));
+        _navMeshAgent.SetDestination(GetRandomPoint(Vector3.zero, _range));
         _navMeshAgent.stoppingDistance = 0;
     }
 
@@ -71,16 +86,7 @@ public class EnemyMovementController : MovementController, IRotatable
 
     private Vector3 GetRandomPoint(Vector3 center, float maxDistance)
     {
-        Vector3 _randomPos = Random.insideUnitSphere * maxDistance + center;
-        _randomPos.y = MoveTransform.position.y;
-        NavMeshHit _hit;
-
-        if (NavMesh.SamplePosition(_randomPos, out _hit, maxDistance, NavMesh.AllAreas))
-        {
-            _destination = _hit.position;
-        }
-
-        return _destination;
+        return NavmeshControl.GetRandomPoint(center, maxDistance, MoveTransform.position.y);
     }
 
     public void LookAt(Vector3 position)

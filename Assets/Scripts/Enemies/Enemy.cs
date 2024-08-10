@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public void Initialize(Vector3 position)
+    public override void Initialize()
     {
-        Initialize();
+        base.Initialize();
 
-        MovementController.MoveTransform.position = position;
         gameObject.SetActive(true);
     }
 

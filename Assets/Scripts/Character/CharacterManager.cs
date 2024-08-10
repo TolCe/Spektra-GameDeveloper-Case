@@ -46,13 +46,13 @@ public class CharacterManager : Singleton<CharacterManager>
 
     private void SpawnEnemyOnRandomPoint()
     {
-        Vector3 _randomPos = Random.insideUnitSphere * _enemySpawnRange;
-        _randomPos.y = transform.position.y;
-        NavMeshHit _hit;
+        Vector3 point = NavmeshControl.GetRandomPoint(Vector3.zero, _enemySpawnRange, 0);
 
-        if (NavMesh.SamplePosition(_randomPos, out _hit, _enemySpawnRange, NavMesh.AllAreas))
+        if (point.magnitude != 0)
         {
-            GetNewEnemy().Initialize(_hit.position);
+            Enemy enemy = GetNewEnemy();
+            enemy.Initialize();
+            enemy.SetPosition(point);
         }
         else
         {

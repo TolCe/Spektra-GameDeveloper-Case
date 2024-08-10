@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class Bullet : Projectile, IProjectile
+public class Bullet : Projectile
 {
-    public void Hit(HealthController healthController)
+    public override void OnHit(Character character)
     {
-        healthController?.GetShot(WeaponProperties);
+        base.OnHit(character);
 
-        Despawn();
+        character?.GetHit(WeaponProperties);
+
+        OnRangeReached();
     }
 }
