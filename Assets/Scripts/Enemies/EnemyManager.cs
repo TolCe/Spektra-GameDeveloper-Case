@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class CharacterManager : Singleton<CharacterManager>
+public class EnemyManager : Singleton<EnemyManager>
 {
-    [SerializeField] private Player _player;
-
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private Transform _enemyContainer;
     private ObjectPool<Enemy> _enemyPool;

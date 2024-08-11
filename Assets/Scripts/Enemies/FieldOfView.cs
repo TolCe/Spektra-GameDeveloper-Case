@@ -23,12 +23,11 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private MeshFilter _viewMeshFilter;
     private Mesh _viewMesh;
 
+    private const string ViewMeshKey = "ViewMesh";
+
     private void Awake()
     {
-        _viewMesh = new Mesh();
-        _viewMesh.name = "View Mesh";
-        _viewMeshFilter.mesh = _viewMesh;
-
+        SetViewMesh();
         VisibleTargets = new List<Character>();
     }
 
@@ -36,6 +35,13 @@ public class FieldOfView : MonoBehaviour
     {
         FindVisibleTargets();
         DrawFieldOfView();
+    }
+
+    private void SetViewMesh()
+    {
+        _viewMesh = new Mesh();
+        _viewMesh.name = ViewMeshKey;
+        _viewMeshFilter.mesh = _viewMesh;
     }
 
     private void FindVisibleTargets()
@@ -50,7 +56,8 @@ public class FieldOfView : MonoBehaviour
             {
                 Vector3 targetPosition = character.GetPosition();
                 Vector3 directionToTarget = (targetPosition - transform.position).normalized;
-                if (Vector3.Angle(transform.forward, directionToTarget) < _viewAngle / 2)
+
+                if (Vector3.Angle(transform.forward, directionToTarget) < _viewAngle * 0.5f)
                 {
                     float distanceFromTarget = Vector3.Distance(transform.position, targetPosition);
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceFromTarget, _obstacleMask))
@@ -79,8 +86,10 @@ public class FieldOfView : MonoBehaviour
     {
         int stepCount = Mathf.RoundToInt(_viewAngle * _meshResolution);
         float stepAngleSize = _viewAngle / stepCount;
+
         List<Vector3> viewPoints = new List<Vector3>();
         ViewCastInfo oldViewCast = new ViewCastInfo();
+
         for (int i = 0; i <= stepCount; i++)
         {
             float angle = transform.eulerAngles.y - _viewAngle / 2 + stepAngleSize * i;
@@ -88,22 +97,22 @@ public class FieldOfView : MonoBehaviour
 
             if (i > 0)
             {
-                bool edgeDstThresholdExceeded = Mathf.Abs(oldViewCast.dst - newViewCast.dst) > _edgeDistanceThreshold;
-                if (oldViewCast.hit != newViewCast.hit || (oldViewCast.hit && newViewCast.hit && edgeDstThresholdExceeded))
+                bool edgeDstThresholdExceeded = Mathf.Abs(oldViewCast.Distance - newViewCast.Distance) > _edgeDistanceThreshold;
+                if (oldViewCast.Hit != newViewCast.Hit || (oldViewCast.Hit && newViewCast.Hit && edgeDstThresholdExceeded))
                 {
                     EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
-                    if (edge.pointA != Vector3.zero)
+                    if (edge.PointA != Vector3.zero)
                     {
-                        viewPoints.Add(edge.pointA);
+                        viewPoints.Add(edge.PointA);
                     }
-                    if (edge.pointB != Vector3.zero)
+                    if (edge.PointB != Vector3.zero)
                     {
-                        viewPoints.Add(edge.pointB);
+                        viewPoints.Add(edge.PointB);
                     }
                 }
             }
 
-            viewPoints.Add(newViewCast.point);
+            viewPoints.Add(newViewCast.Point);
             oldViewCast = newViewCast;
         }
 
@@ -133,8 +142,8 @@ public class FieldOfView : MonoBehaviour
 
     private EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast)
     {
-        float minAngle = minViewCast.angle;
-        float maxAngle = maxViewCast.angle;
+        float minAngle = minViewCast.Angle;
+        float maxAngle = maxViewCast.Angle;
         Vector3 minPoint = Vector3.zero;
         Vector3 maxPoint = Vector3.zero;
 
@@ -143,16 +152,16 @@ public class FieldOfView : MonoBehaviour
             float angle = (minAngle + maxAngle) / 2;
             ViewCastInfo newViewCast = ViewCast(angle);
 
-            bool edgeDstThresholdExceeded = Mathf.Abs(minViewCast.dst - newViewCast.dst) > _edgeDistanceThreshold;
-            if (newViewCast.hit == minViewCast.hit && !edgeDstThresholdExceeded)
+            bool edgeDstThresholdExceeded = Mathf.Abs(minViewCast.Distance - newViewCast.Distance) > _edgeDistanceThreshold;
+            if (newViewCast.Hit == minViewCast.Hit && !edgeDstThresholdExceeded)
             {
                 minAngle = angle;
-                minPoint = newViewCast.point;
+                minPoint = newViewCast.Point;
             }
             else
             {
                 maxAngle = angle;
-                maxPoint = newViewCast.point;
+                maxPoint = newViewCast.Point;
             }
         }
 
@@ -161,20 +170,20 @@ public class FieldOfView : MonoBehaviour
 
     private ViewCastInfo ViewCast(float globalAngle)
     {
-        Vector3 dir = DirFromAngle(globalAngle, true);
+        Vector3 direction = DirectionFromAngle(globalAngle, true);
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, dir, out hit, _viewRadius, _obstacleMask))
+        if (Physics.Raycast(transform.position, direction, out hit, _viewRadius, _obstacleMask))
         {
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
         }
         else
         {
-            return new ViewCastInfo(false, transform.position + dir * _viewRadius, _viewRadius, globalAngle);
+            return new ViewCastInfo(false, transform.position + direction * _viewRadius, _viewRadius, globalAngle);
         }
     }
 
-    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    public Vector3 DirectionFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)
         {
@@ -185,29 +194,29 @@ public class FieldOfView : MonoBehaviour
 
     public struct ViewCastInfo
     {
-        public bool hit;
-        public Vector3 point;
-        public float dst;
-        public float angle;
+        public bool Hit;
+        public Vector3 Point;
+        public float Distance;
+        public float Angle;
 
-        public ViewCastInfo(bool _hit, Vector3 _point, float _dst, float _angle)
+        public ViewCastInfo(bool hit, Vector3 point, float distance, float angle)
         {
-            hit = _hit;
-            point = _point;
-            dst = _dst;
-            angle = _angle;
+            Hit = hit;
+            Point = point;
+            Distance = distance;
+            Angle = angle;
         }
     }
 
     public struct EdgeInfo
     {
-        public Vector3 pointA;
-        public Vector3 pointB;
+        public Vector3 PointA;
+        public Vector3 PointB;
 
-        public EdgeInfo(Vector3 _pointA, Vector3 _pointB)
+        public EdgeInfo(Vector3 pointA, Vector3 pointB)
         {
-            pointA = _pointA;
-            pointB = _pointB;
+            PointA = pointA;
+            PointB = pointB;
         }
     }
 }

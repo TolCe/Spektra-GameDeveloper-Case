@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProjectilesData_", menuName = "Projectile/Projectiles Data")]
+[CreateAssetMenu(fileName = "ProjectileData_", menuName = "Projectile/Projectile Data")]
 public class ProjectileDataSO : ScriptableObject
 {
     [SerializeField] private Enums.ProjectileTypes _type;

@@ -6,9 +6,4 @@ public class Pistol : Weapon, IWeapon
         projectile.SetTransform(transform.position, transform.eulerAngles);
         projectile.Initialize(weaponProperties);
     }
-
-    public Projectile CreateBullet()
-    {
-        return ProjectileManager.Instance.GetProjectileByType(Enums.ProjectileTypes.Bullet);
-    }
 }

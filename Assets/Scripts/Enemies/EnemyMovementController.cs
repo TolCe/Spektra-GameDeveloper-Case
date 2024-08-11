@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -51,16 +50,7 @@ public class EnemyMovementController : MovementController, IRotatable
             }
         }
 
-
-        if (_navMeshAgent.speed == 0)
-        {
-            AnimationController.ChangeFloat("Vertical", 0);
-            AnimationController.ChangeFloat("Horizontal", 0);
-        }
-        else
-        {
-            AnimationController.ChangeFloat("Vertical", 2);
-        }
+        AnimationController.ModifyFloat("Vertical", Mathf.Clamp(_navMeshAgent.speed, 0f, 1f));
     }
 
     public override void Stop()

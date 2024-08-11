@@ -1,5 +1,3 @@
-using System;
-
 public class PlayerShootController : ShootController
 {
     private void OnEnable()

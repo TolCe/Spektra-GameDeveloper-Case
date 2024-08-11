@@ -8,16 +8,12 @@ public class Character : MonoBehaviour
     [SerializeField] private HealthController _healthController;
     public HealthController HealthController { get { return _healthController; } }
 
-    [SerializeField] private HealthVisualizer _healthVisualizer;
-    public HealthVisualizer HealthVisualizer { get { return _healthVisualizer; } }
-
     [SerializeField] private ShootController _shootController;
     public ShootController ShootController { get { return _shootController; } }
 
     public virtual void Initialize()
     {
         _healthController.Initialize(this);
-        _healthVisualizer.Initialize(this);
         _shootController.Initialize();
         _movementController.Initialize(this);
     }

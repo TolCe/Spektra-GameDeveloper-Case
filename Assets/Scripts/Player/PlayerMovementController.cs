@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerMovementController : MovementController, IMovable, IRotatable
 {
@@ -28,9 +26,13 @@ public class PlayerMovementController : MovementController, IMovable, IRotatable
         }
 
         MoveInDirection(direction);
+        SetAnimation(direction);
+    }
 
-        AnimationController.ChangeFloat("Vertical", direction.z);
-        AnimationController.ChangeFloat("Horizontal", direction.x);
+    private void SetAnimation(Vector3 direction)
+    {
+        AnimationController.ModifyFloat("Vertical", direction.x * Mathf.Sin(RotateTransform.eulerAngles.y) + direction.z * Mathf.Cos(RotateTransform.eulerAngles.y));
+        AnimationController.ModifyFloat("Horizontal", direction.x * Mathf.Cos(RotateTransform.eulerAngles.y) + direction.z * Mathf.Sin(RotateTransform.eulerAngles.y));
     }
 
     private void OnMouseMovement(Vector3 position)

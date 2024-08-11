@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e34fa19b07f2cf45a0566c88200f5c8, type: 3}
-  m_Name: ProjectilesData_Rocket
+  m_Script: {fileID: 11500000, guid: 21f972af34f941c4097fa7ac8aff5bf8, type: 3}
+  m_Name: ProjectileData_Bullet
   m_EditorClassIdentifier: 
-  _type: 1
-  _prefab: {fileID: 7397245893681193165, guid: 0e6845e58681d0a4eaa57f862de1a0d3, type: 3}
+  _type: 0
+  _prefab: {fileID: 4745564993358461473, guid: ed9e41829cf9db249b01eb092fcb2fc3, type: 3}
   _targetLayers:
     serializedVersion: 2
     m_Bits: 64
-  _effectiveRadius: 10

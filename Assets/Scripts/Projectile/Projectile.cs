@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour
 
     public virtual void OnHit(Character character)
     {
-
+        Despawn();
     }
 
     public virtual void OnRangeReached()
@@ -67,4 +67,12 @@ public class WeaponProperties
     public float Range;
     public float Speed;
     public float ArmourPenetrationRatio;
+
+    public WeaponProperties(float damage, float range, float speed, float armourPenetrationRatio)
+    {
+        Damage = damage;
+        Range = range;
+        Speed = speed;
+        ArmourPenetrationRatio = armourPenetrationRatio;
+    }
 }

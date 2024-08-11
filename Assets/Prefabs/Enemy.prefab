@@ -138,7 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementController: {fileID: 2005853045369527089}
   _healthController: {fileID: 2999743561432015138}
-  _healthVisualizer: {fileID: 2184866599500996400}
   _shootController: {fileID: -4849922706585274521}
 --- !u!114 &2005853045369527089
 MonoBehaviour:
@@ -188,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthData: {fileID: 11400000, guid: bbb2dab9eb72c8b4ab1942abbd7e49e8, type: 2}
+  _healthVisualizer: {fileID: 2184866599500996400}
 --- !u!114 &2184866599500996400
 MonoBehaviour:
   m_ObjectHideFlags: 0

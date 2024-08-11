@@ -9,8 +9,7 @@ public class CharacterCollisionController : MonoBehaviour
         ICollectable collectable = other.GetComponentInParent<ICollectable>();
         if (collectable != null)
         {
-            _character.ShootController.GetUpgrade(collectable);
-            CollectableManager.Instance.CollectCollectable(collectable as Collectable);
+            CollectableManager.Instance.CollectCollectable(_character, collectable);
         }
     }
 }

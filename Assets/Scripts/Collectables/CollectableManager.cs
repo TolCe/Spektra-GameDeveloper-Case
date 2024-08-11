@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -69,8 +67,9 @@ public class CollectableManager : Singleton<CollectableManager>
         }
     }
 
-    public void CollectCollectable(Collectable collectable)
+    public void CollectCollectable(Character collectedCharacter, ICollectable collectable)
     {
-        HideItem(collectable);
+        collectedCharacter.ShootController.GetUpgrade(collectable);
+        HideItem(collectable as Collectable);
     }
 }

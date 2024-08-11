@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -17,5 +16,10 @@ public class Weapon : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public Projectile CreateBullet()
+    {
+        return ProjectileManager.Instance.GetProjectileByType(WeaponData.ProjectileType);
     }
 }

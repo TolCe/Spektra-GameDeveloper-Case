@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WeaponData_RPG
   m_EditorClassIdentifier: 
   _type: 2
+  _projectileType: 1
   _cooldown: 2
   _armourPenetrationRatio: 0.8
   _damage: 50

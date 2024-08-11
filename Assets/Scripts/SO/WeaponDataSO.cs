@@ -6,6 +6,9 @@ public class WeaponDataSO : ScriptableObject
     [SerializeField] private Enums.WeaponTypes _type;
     public Enums.WeaponTypes Type { get { return _type; } }
 
+    [SerializeField] private Enums.ProjectileTypes _projectileType;
+    public Enums.ProjectileTypes ProjectileType { get { return _projectileType; } }
+
     [SerializeField] private float _cooldown;
     public float Cooldown { get { return _cooldown; } }
 

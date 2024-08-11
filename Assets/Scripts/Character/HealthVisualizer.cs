@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 public class HealthVisualizer : MonoBehaviour
 {
     [SerializeField] private GameObject _armourContainer;
@@ -9,12 +8,8 @@ public class HealthVisualizer : MonoBehaviour
     [SerializeField] private SpriteRenderer _armourSprite;
     [SerializeField] private SpriteRenderer _healthSprite;
 
-    private Character _attachedCharacter;
-
-    public void Initialize(Character attachedCharacter)
+    public void Initialize()
     {
-        _attachedCharacter = attachedCharacter;
-
         _armourContainer.SetActive(true);
         _healthContainer.SetActive(true);
 

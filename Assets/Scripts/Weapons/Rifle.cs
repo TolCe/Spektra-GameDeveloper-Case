@@ -19,9 +19,4 @@ public class Rifle : Weapon, IWeapon
             yield return new WaitForFixedUpdate();
         }
     }
-
-    public Projectile CreateBullet()
-    {
-        return ProjectileManager.Instance.GetProjectileByType(Enums.ProjectileTypes.Bullet);
-    }
 }

@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 61027555}
   - component: {fileID: 61027556}
   m_Layer: 0
-  m_Name: CharacterManager
+  m_Name: EnemyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,13 +208,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 61027554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f652a9452e9991438f47fe5e7cf89a1, type: 3}
+  m_Script: {fileID: 11500000, guid: d4c9d3e5180005d4e95d4764885ae80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1128424130}
   _enemyPrefab: {fileID: 3558606672734510280, guid: 07ee89a374d081142abdb2ab50b900b6, type: 3}
   _enemyContainer: {fileID: 61027555}
-  _enemySpawnRange: 100
+  _enemySpawnRange: 50
 --- !u!1001 &176054956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1292,7 +1291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementController: {fileID: 1128424126}
   _healthController: {fileID: 1128424131}
-  _healthVisualizer: {fileID: 1128424129}
   _shootController: {fileID: 1128424127}
 --- !u!114 &1128424131
 MonoBehaviour:
@@ -1307,6 +1305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthData: {fileID: 11400000, guid: 4bfdf8a8fc6c4874fb15d97dc55a4d9f, type: 2}
+  _healthVisualizer: {fileID: 1128424129}
 --- !u!1 &1337390644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,6 +1527,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screen: {fileID: 603957399}
   _respawnButton: {fileID: 2126827534}
+--- !u!1 &1539880269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539880270}
+  m_Layer: 5
+  m_Name: UpgradeScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1539880270
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539880269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1805770681}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1551561685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1832,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1525306086}
+  - {fileID: 1539880270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

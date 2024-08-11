@@ -11,6 +11,6 @@ public class Enemy : Character
     {
         base.Die();
 
-        CharacterManager.Instance.OnEnemyDeath(this);
+        EnemyManager.Instance.OnEnemyDeath(this);
     }
 }

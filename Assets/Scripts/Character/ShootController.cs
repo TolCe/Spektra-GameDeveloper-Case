@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class ShootController : MonoBehaviour
 {
-    private float _cooldown;
-    public float Cooldown { get { return _cooldown; } }
+    private float _currentCooldown;
 
     private Weapon _currentWeapon;
 
@@ -18,18 +17,12 @@ public class ShootController : MonoBehaviour
     public void Initialize()
     {
         _upgradeList = new List<Collectable>();
-        EquipWeapon(Enums.WeaponTypes.Pistol);
+        EquipWeapon(_weaponList[0].WeaponData.Type);
     }
 
     private void SetProperties()
     {
-        _weaponProperties = new WeaponProperties()
-        {
-            Damage = _currentWeapon.WeaponData.Damage,
-            Range = _currentWeapon.WeaponData.Range,
-            Speed = _currentWeapon.WeaponData.Speed,
-            ArmourPenetrationRatio = _currentWeapon.WeaponData.ArmourPenetrationRatio,
-        };
+        _weaponProperties = new WeaponProperties(_currentWeapon.WeaponData.Damage, _currentWeapon.WeaponData.Range, _currentWeapon.WeaponData.Speed, _currentWeapon.WeaponData.ArmourPenetrationRatio);
 
         foreach (ICollectable collectable in _upgradeList)
         {
@@ -39,26 +32,26 @@ public class ShootController : MonoBehaviour
 
     private void Update()
     {
-        if (_cooldown > 0)
+        if (_currentCooldown > 0)
         {
-            _cooldown -= Time.deltaTime;
+            _currentCooldown -= Time.deltaTime;
         }
     }
 
-    public void ResetCooldown()
+    private void ResetCooldown()
     {
-        _cooldown = 0;
+        _currentCooldown = 0;
     }
 
     public void Shoot()
     {
-        if (_cooldown > 0)
+        if (_currentCooldown > 0)
         {
             return;
         }
 
         (_currentWeapon as IWeapon).Shoot(_weaponProperties);
-        _cooldown = _currentWeapon.WeaponData.Cooldown;
+        _currentCooldown = _currentWeapon.WeaponData.Cooldown;
     }
 
     public void EquipWeapon(Enums.WeaponTypes weaponType)

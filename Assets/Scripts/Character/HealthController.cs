@@ -7,6 +7,9 @@ public class HealthController : MonoBehaviour
     private HealthProperties _healthProperty;
     public HealthProperties HealthProperty { get { return _healthProperty; } }
 
+    [SerializeField] private HealthVisualizer _healthVisualizer;
+    public HealthVisualizer HealthVisualizer { get { return _healthVisualizer; } }
+
     private Character _attachedCharacter;
 
     public bool IsAlive { get { return _healthProperty.Health > 0; } }
@@ -22,11 +25,8 @@ public class HealthController : MonoBehaviour
 
         _healthProperty.Health = _healthData.Health;
         _healthProperty.Armour = _healthData.Armour;
-    }
 
-    public Vector3 GetPosition()
-    {
-        return transform.position;
+        _healthVisualizer.Initialize();
     }
 
     public virtual void Die()
@@ -58,7 +58,7 @@ public class HealthController : MonoBehaviour
         _healthProperty.Health += modifyAmount;
         _healthProperty.Health = Mathf.Clamp(_healthProperty.Health, 0, Mathf.Infinity);
 
-        _attachedCharacter.HealthVisualizer.ModifyHealthBar(_healthProperty.Health / _healthData.Health);
+        _healthVisualizer.ModifyHealthBar(_healthProperty.Health / _healthData.Health);
     }
 
     public void ModifyArmour(float modifyAmount)
@@ -71,7 +71,7 @@ public class HealthController : MonoBehaviour
         _healthProperty.Armour += modifyAmount;
         _healthProperty.Armour = Mathf.Clamp(_healthProperty.Armour, 0, Mathf.Infinity);
 
-        _attachedCharacter.HealthVisualizer.ModifyArmourBar(_healthProperty.Armour / _healthData.Armour);
+        _healthVisualizer.ModifyArmourBar(_healthProperty.Armour / _healthData.Armour);
     }
 
     public struct HealthProperties

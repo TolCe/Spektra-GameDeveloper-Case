@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Rocket : Projectile
 {
@@ -7,12 +6,12 @@ public class Rocket : Projectile
 
     public override void OnHit(Character character)
     {
-        base.OnHit(character);
+        Explode();
 
-        ExplodeOnHit();
+        base.OnHit(character);
     }
 
-    private void ExplodeOnHit()
+    private void Explode()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, RocketData.EffectiveRadius, RocketData.TargetLayers);
         foreach (Collider collider in colliders)
@@ -23,7 +22,7 @@ public class Rocket : Projectile
 
     public override void OnRangeReached()
     {
-        ExplodeOnHit();
+        Explode();
 
         base.OnRangeReached();
     }
