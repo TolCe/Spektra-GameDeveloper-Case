@@ -63,7 +63,8 @@ public class EnemyMovementController : MovementController, IRotatable
     private void GoRandomPosition()
     {
         _hasDestination = true;
-        _navMeshAgent.SetDestination(GetRandomPoint(Vector3.zero, _range));
+        _destination = GetRandomPoint(Vector3.zero, _range);
+        _navMeshAgent.SetDestination(_destination);
         _navMeshAgent.stoppingDistance = 0;
     }
 
