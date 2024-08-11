@@ -20,7 +20,7 @@ public class RespawnScreen : Screen
     private void OnRespawnButtonClicked()
     {
         Hide();
-        PlayerEvents.CallPlayerRespawnd();
+        PlayerEvents.CallPlayerRespawn();
     }
 
     private void OnDisable()

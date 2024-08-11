@@ -20,4 +20,11 @@ public class PlayerShootController : ShootController
     {
         EquipWeapon(weaponType);
     }
+
+    public override void AddNewUpgrade(ICollectable collectable)
+    {
+        base.AddNewUpgrade(collectable);
+
+        PlayerEvents.CallGetUpgrade((collectable as Collectable).CollectableData);
+    }
 }

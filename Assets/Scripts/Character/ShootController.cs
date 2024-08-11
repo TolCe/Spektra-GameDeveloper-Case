@@ -73,8 +73,13 @@ public class ShootController : MonoBehaviour
     {
         if (!_upgradeList.Find(x => x.CollectableData.Type == (collectable as Collectable).CollectableData.Type))
         {
-            _upgradeList.Add(collectable as Collectable);
-            collectable.SetUpgrade(_weaponProperties);
+            AddNewUpgrade(collectable);
         }
+    }
+
+    public virtual void AddNewUpgrade(ICollectable collectable)
+    {
+        _upgradeList.Add(collectable as Collectable);
+        collectable.SetUpgrade(_weaponProperties);
     }
 }

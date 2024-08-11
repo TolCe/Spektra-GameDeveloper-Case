@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CollectableManager : Singleton<CollectableManager>
+public class CollectableManager : Singleton<CollectableManager>, IPoolable
 {
     [SerializeField] private CollectableDataContainerSO _collectableDataContainer;
 
@@ -14,14 +14,14 @@ public class CollectableManager : Singleton<CollectableManager>
     {
         base.Awake();
 
-        CreatePools();
+        CreatePool();
     }
     private void Start()
     {
         SpawnCollectables();
     }
 
-    private void CreatePools()
+    public void CreatePool()
     {
         _collectablePoolDictionary = new Dictionary<Enums.CollectableTypes, ObjectPool<Collectable>>();
 
@@ -33,16 +33,6 @@ public class CollectableManager : Singleton<CollectableManager>
         }
     }
 
-    public Collectable GetCollectableByType(Enums.CollectableTypes type)
-    {
-        return _collectablePoolDictionary[type].Get();
-    }
-
-    public void HideItem(Collectable collectable)
-    {
-        _collectablePoolDictionary[collectable.CollectableData.Type].Return(collectable);
-    }
-
     public void HideAllItems()
     {
         List<ObjectPool<Collectable>> poolList = _collectablePoolDictionary.Values.ToList();
@@ -50,6 +40,17 @@ public class CollectableManager : Singleton<CollectableManager>
         {
             pool.ReturnAll();
         }
+    }
+
+    public Collectable GetCollectableByType(Enums.CollectableTypes type)
+    {
+        return _collectablePoolDictionary[type].Get();
+    }
+
+    public void HideItem<T>(T item)
+    {
+        Collectable collectable = item as Collectable;
+        _collectablePoolDictionary[collectable.CollectableData.Type].Return(collectable);
     }
 
     public void SpawnCollectables()

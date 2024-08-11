@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ProjectileManager : Singleton<ProjectileManager>
+public class ProjectileManager : Singleton<ProjectileManager>, IPoolable
 {
     [SerializeField] private ProjectileDataContainerSO _projectileDataContainer;
 
@@ -15,10 +15,10 @@ public class ProjectileManager : Singleton<ProjectileManager>
     {
         base.Awake();
 
-        CreatePools();
+        CreatePool();
     }
 
-    private void CreatePools()
+    public void CreatePool()
     {
         _projectilePoolDictionary = new Dictionary<Enums.ProjectileTypes, ObjectPool<Projectile>>();
 
@@ -30,13 +30,9 @@ public class ProjectileManager : Singleton<ProjectileManager>
         }
     }
 
-    public Projectile GetProjectileByType(Enums.ProjectileTypes type)
+    public void HideItem<T>(T item)
     {
-        return _projectilePoolDictionary[type].Get();
-    }
-
-    public void HideItem(Projectile projectile)
-    {
+        Projectile projectile = item as Projectile;
         _projectilePoolDictionary[projectile.ProjectileData.Type].Return(projectile);
     }
 
@@ -47,5 +43,10 @@ public class ProjectileManager : Singleton<ProjectileManager>
         {
             projectilePool.ReturnAll();
         }
+    }
+
+    public Projectile GetProjectileByType(Enums.ProjectileTypes type)
+    {
+        return _projectilePoolDictionary[type].Get();
     }
 }
